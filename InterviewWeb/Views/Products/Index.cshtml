@@ -1,0 +1,68 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Products</h2>
+
+<table id="grid"></table>
+<div id="pager2"></div>
+<script>
+    var grid = jQuery("#grid");
+    jQuery("#grid").jqGrid({
+
+        url: 'http://localhost:33942/api/products',
+        datatype: "json",
+        colNames: ['Id', 'Name', 'Internal Code', 'DateCreated', 'Actions'],
+        colModel: [
+            { name: 'id', index: 'id', width: 55 },
+            { name: 'name', index: 'name', width: 90 },
+            { name: 'internalCode', index: 'internalCode', width: 100 },
+            { name: 'dateCreated', index: 'dateCreated', width: 150, formatter: 'date' },
+            { name: 'Delete', formatter: deleteButton }
+
+        ],
+        pager: '#pager2',
+        loadonce: true,
+        sortable:true,
+        sortname: 'Id',
+        viewrecords: true,
+        sortorder: "desc",
+        caption: "SentryOne",
+        loadComplete: function() {
+            jQuery("#grid").trigger("reloadGrid"); 
+        }
+    });
+    jQuery("#grid").jqGrid('navGrid', '#pager2', { edit: false, add: false, del: false });
+
+
+    function deleteButton() {
+        return '<button type="button" onClick="deleteProduct.call(this)">Delete</button> <button type="button" onClick="viewProduct.call(this)">View</button>';
+    }
+
+    function viewProduct(e) {
+        var rowid = jQuery(this).closest("tr.jqgrow").attr("id");
+        window.location.assign("/ProductDetails/Index/" + rowid);
+
+    }
+
+    function deleteProduct() {
+        var rowid = jQuery(this).closest("tr.jqgrow").attr("id");
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://localhost:33942/api/products/' + rowid,
+        }).done(function (response) {
+            location.reload();
+        }).fail(function() {
+            console.log("ERROR!");
+        });
+    }
+
+</script>
+
+@section scripts {
+    @Scripts.Render("~/scripts/products.js")
+    @Scripts.Render("~/scripts/example.js")
+}

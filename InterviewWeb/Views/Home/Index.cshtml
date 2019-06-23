@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>InterviewWeb</h2>
+
+<ol>
+    <li>The default landing page should be "/Products", instead of this requirements page</li>
+    <li>The Products page should be showing a list of products, with data coming from a REST API but the implementation is not complete.
+        <br/>
+        Implement the required RESTful WebApi endpoints in the ApiControllers folder and add the required functionality to meet the following core requirements:
+        <ul>
+            <li>The InMemoryProductsRepository can be used as the source of the data</li>
+            <li>Assume this may be switched for a SQL Server backend repository in the future so we want to minimize data pulled from the database</li>
+            <li>Discontinued products should not be returned</li>
+            <li>The data returned from the API should match the exact format that the JavaScript code is expecting (properties, property names etc) and should be accessible from the URI the JavaScript is calling</li>            
+            <li>The page should offer a way to sort the data client-side, by product name ascending or descending</li>
+            <li>There should be a delete button against each product. When clicked, it should delete that product via a call to the WebApi and update the displayed list if successful</li>
+            <li>There should be unit test coverage of the WebApi</li>
+            <li>Not required for implementation, but what changes would you recommend if there are a large number of products?</li>
+        </ul>
+    </li>
+    <li>
+        Add a new ProductDetails page to show the full details for a given product identifier inline with the following requirements:
+        <ul>
+            <li>Load the data via an AJAX request to a WebApi endpoint that logically fits in with a RESTful API design</li>
+            <li>The API should return a 404 response if the product does not exist</li>
+            <li>The API should return a 410 response if the product has been discontinued</li>
+            <li>The page should show a friendly message in the above scenarios</li>
+            <li>The JavaScript for the new view should reside in a separate js file</li>
+            <li>The product name on the main Products page, should link to this new page</li>
+        </ul>
+    </li>
+    <li>
+        See questions in example.js and add comments to answer.
+    </li>
+    <li>
+        What could we do client-side, to cache results from the products list API endpoint instead of making an API call every time? How could this work between browser sessions/restarts?<br/>        
+    </li>
+</ol>
+

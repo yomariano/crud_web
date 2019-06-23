@@ -1,0 +1,5 @@
+Client Side caching can be achieved by using the "Cache-Control" header
+resp.setHeader(HttpHeaders.CACHE_CONTROL, value);
+
+It can also be cached by using the "Etag" header
+

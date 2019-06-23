@@ -1,0 +1,38 @@
+﻿@model Int32
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Product Details</h2>
+
+<form>
+    <div class="form-group">
+        <label for="id">Id</label>
+        <input class="form-control" id="identifier" readonly>
+    </div>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input class="form-control" id="name" readonly>
+    </div>
+    <div class="form-group">
+        <label for="internalCode">Internal Code</label>
+        <input class="form-control" id="internalCode" readonly>
+    </div>
+    <div class="form-group">
+        <label for="dateCreated">Date Created</label>
+        <input class="form-control" id="dateCreated" readonly>
+    </div>
+    <div class="form-group">
+        <label for="dateDiscontinued">DateDiscontinued</label>
+        <input class="form-control" id="dateDiscontinued" readonly>
+    </div>
+</form>
+
+<script type="text/javascript" src="~/Scripts/productDetails.js"></script>
+
+<script type="text/javascript">
+    productDetails.init([@Model]);
+    productDetails.getProduct();
+</script>
